@@ -301,27 +301,75 @@ body::before {
   100% { background-position: 0% 50%; }
 }
 
-/* ===== FLOATING CODE BADGES ===== */
+/* ===== HEXAGON PHOTO FRAME & GLOW BORDER ===== */
 .hero-avatar-box {
   position: relative;
   flex: 1;
   min-width: 300px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   background: transparent !important;
+}
+
+.hexagon-frame {
+  position: relative;
+  width: 320px;
+  height: 350px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275), filter 0.4s ease;
+  cursor: pointer;
+}
+
+.hexagon-frame:hover {
+  transform: scale(1.03);
+  filter: drop-shadow(0 0 35px rgba(0, 229, 255, 0.55));
+}
+
+.hero-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  z-index: 2;
+  border-radius: 0;
+  box-shadow: none;
+  background: transparent !important;
+  filter: drop-shadow(0 15px 30px rgba(0, 0, 0, 0.6));
+}
+
+.hexagon-glow-border {
+  position: absolute;
+  inset: -6px;
+  background: linear-gradient(135deg, #00e5ff 0%, #3a86ff 40%, #8338ec 75%, #00e5ff 100%);
+  background-size: 300% 300%;
+  clip-path: polygon(50% 0%, 95% 25%, 95% 75%, 50% 100%, 5% 75%, 5% 25%);
+  z-index: 1;
+  animation: rotateHexagonGlow 6s linear infinite;
+  opacity: 0.9;
+  filter: blur(5px);
+}
+
+@keyframes rotateHexagonGlow {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .floating-icon {
   position: absolute;
-  background: rgba(11, 21, 40, 0.85);
+  background: rgba(11, 21, 40, 0.88);
   backdrop-filter: blur(8px);
-  border: 1px solid rgba(0, 229, 255, 0.3);
+  border: 1px solid rgba(0, 229, 255, 0.35);
   color: var(--primary);
   font-weight: 700;
   font-family: 'Fira Code', monospace, sans-serif;
   font-size: 0.9rem;
   padding: 8px 14px;
   border-radius: 14px;
-  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4), 0 0 15px rgba(0, 229, 255, 0.2);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5), 0 0 15px rgba(0, 229, 255, 0.25);
   pointer-events: none;
   z-index: 5;
 }
@@ -1135,6 +1183,8 @@ footer {
   .navbar { flex-direction: column; padding: 15px; }
   .navbar a { margin: 5px 10px; font-size: 0.9rem; }
   .floating-char { display: none; }
+  .hexagon-frame { width: 240px; height: 265px; }
+  .floating-icon { font-size: 0.78rem; padding: 6px 10px; }
 }
 
 /* ===== PREFERS REDUCED MOTION ===== */
