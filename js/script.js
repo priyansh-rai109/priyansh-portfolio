@@ -240,13 +240,13 @@ document.addEventListener('DOMContentLoaded', () => {
                   "number": { "value": particleCount, "density": { "enable": true, "value_area": 800 } },
                   "color": { "value": "#00E5FF" },
                   "shape": { "type": "circle" },
-                  "opacity": { "value": 0.22, "random": false },
+                  "opacity": { "value": 0.25, "random": false },
                   "size": { "value": 3, "random": true },
                   "line_linked": {
                       "enable": true,
                       "distance": 140,
                       "color": "#00E5FF",
-                      "opacity": 0.14,
+                      "opacity": 0.16,
                       "width": 1
                   },
                   "move": { "enable": true, "speed": 1.5, "direction": "none", "random": false, "straight": false, "out_mode": "out", "bounce": false }
@@ -259,14 +259,127 @@ document.addEventListener('DOMContentLoaded', () => {
                       "resize": true
                   },
                   "modes": {
-                      "grab": { "distance": 130, "line_linked": { "opacity": 0.35 } },
+                      "grab": { "distance": 160, "line_linked": { "opacity": 0.45 } },
                       "push": { "particles_nb": 3 }
                   }
               },
               "retina_detect": true
           });
-          console.log("✅ Particles.js Loaded!");
+          console.log("✅ Particles.js Loaded with Grab Mode!");
       };
       document.body.appendChild(particlesScript);
+  }
+
+  // ===== Magnetic Button Effect =====
+  const isReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (!isReducedMotion && window.innerWidth >= 768) {
+      const magneticBtns = document.querySelectorAll('.magnetic-btn');
+      magneticBtns.forEach(btn => {
+          btn.addEventListener('mousemove', (e) => {
+              const rect = btn.getBoundingClientRect();
+              const btnCenterX = rect.left + rect.width / 2;
+              const btnCenterY = rect.top + rect.height / 2;
+              const deltaX = (e.clientX - btnCenterX) * 0.28;
+              const deltaY = (e.clientY - btnCenterY) * 0.28;
+              btn.style.transform = `translate(${deltaX}px, ${deltaY}px) scale(1.04)`;
+          });
+
+          btn.addEventListener('mouseleave', () => {
+              btn.style.transform = 'translate(0px, 0px) scale(1)';
+          });
+      });
+  }
+
+  // ===== Hero Cursor Glow & Layered Parallax =====
+  if (!isReducedMotion && window.innerWidth >= 768) {
+      const heroSection = document.getElementById('hero');
+      const heroCursorGlow = document.querySelector('.hero-cursor-glow');
+      const heroAvatarBox = document.querySelector('.hero-avatar-box');
+      const particlesCanvas = document.getElementById('particles-js');
+
+      if (heroSection) {
+          heroSection.addEventListener('mousemove', (e) => {
+              const rect = heroSection.getBoundingClientRect();
+              const x = e.clientX - rect.left;
+              const y = e.clientY - rect.top;
+
+              // 1. Move Custom Glow
+              if (heroCursorGlow) {
+                  heroCursorGlow.style.left = `${x}px`;
+                  heroCursorGlow.style.top = `${y}px`;
+              }
+
+              // 2. Avatar Parallax
+              const centerX = rect.width / 2;
+              const centerY = rect.height / 2;
+              const moveX = (x - centerX) / 30;
+              const moveY = (y - centerY) / 30;
+
+              if (heroAvatarBox) {
+                  heroAvatarBox.style.transform = `translate(${moveX}px, ${moveY}px)`;
+              }
+
+              // 3. Particles Background Parallax (Opposite Direction)
+              if (particlesCanvas) {
+                  particlesCanvas.style.transform = `translate(${-moveX * 0.3}px, ${-moveY * 0.3}px)`;
+              }
+          });
+
+          heroSection.addEventListener('mouseleave', () => {
+              if (heroAvatarBox) heroAvatarBox.style.transform = 'translate(0px, 0px)';
+              if (particlesCanvas) particlesCanvas.style.transform = 'translate(0px, 0px)';
+          });
+      }
+  }
+
+  // ===== Animated Stats Counter (requestAnimationFrame) =====
+  function animateStatsCounter() {
+      const statNumbers = document.querySelectorAll('.stat-number');
+      if (statNumbers.length === 0) return;
+
+      statNumbers.forEach(stat => {
+          const target = parseInt(stat.getAttribute('data-target'), 10);
+          if (isNaN(target)) return;
+
+          const duration = 1800; // 1.8 seconds count-up
+          const startTime = performance.now();
+
+          function updateCount(currentTime) {
+              const elapsedTime = currentTime - startTime;
+              const progress = Math.min(elapsedTime / duration, 1);
+              // Ease-out cubic calculation
+              const easeProgress = 1 - Math.pow(1 - progress, 3);
+              const currentVal = Math.floor(easeProgress * target);
+              stat.textContent = currentVal;
+
+              if (progress < 1) {
+                  requestAnimationFrame(updateCount);
+              } else {
+                  stat.textContent = target;
+              }
+          }
+
+          requestAnimationFrame(updateCount);
+      });
+  }
+
+  const heroStatsRow = document.querySelector('.hero-stats');
+  if (heroStatsRow) {
+      if (isReducedMotion) {
+          // Instantly set target values for reduced motion
+          document.querySelectorAll('.stat-number').forEach(s => {
+              s.textContent = s.getAttribute('data-target');
+          });
+      } else {
+          const statsObserver = new IntersectionObserver((entries) => {
+              entries.forEach(entry => {
+                  if (entry.isIntersecting) {
+                      animateStatsCounter();
+                      statsObserver.disconnect();
+                  }
+              });
+          }, { threshold: 0.4 });
+          statsObserver.observe(heroStatsRow);
+      }
   }
 });
