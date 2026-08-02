@@ -91,29 +91,36 @@ document.addEventListener('DOMContentLoaded', () => {
   window.addEventListener('scroll', animateSkills);
   animateSkills(); // trigger on page load
 
-  // ===== Certificate Popups =====
-  function setupCertificate(btnId, popupId, closeId){
-      const openBtn = document.getElementById(btnId);
-      const popup = document.getElementById(popupId);
-      const closeBtn = document.getElementById(closeId);
-
-      if(openBtn && popup && closeBtn){
-          openBtn.addEventListener("click", ()=>{ popup.style.display = "flex"; });
-          closeBtn.addEventListener("click", ()=>{ popup.style.display = "none"; });
-          window.addEventListener("click", (e) => { if(e.target === popup) popup.style.display = "none"; });
+  // ===== Certificate Popups (Robust Event Delegation) =====
+  document.addEventListener('click', (e) => {
+      // 1. Open Modal Button Click
+      const btn = e.target.closest('.btn-view, [data-cert-target], [id^="openCert"]');
+      if (btn) {
+          let targetId = btn.getAttribute('data-cert-target');
+          if (!targetId && btn.id) {
+              targetId = btn.id.replace('openCert', 'certPopup');
+          }
+          if (targetId) {
+              const popup = document.getElementById(targetId);
+              if (popup) {
+                  popup.style.display = 'flex';
+              }
+          }
       }
-  }
-  setupCertificate("openCert1","certPopup1","closeCert1");
-  setupCertificate("openCert2","certPopup2","closeCert2");
-  setupCertificate("openCert3","certPopup3","closeCert3");
-  setupCertificate("openCert4","certPopup4","closeCert4");
-  setupCertificate("openCert5","certPopup5","closeCert5");
-  setupCertificate("openCert6","certPopup6","closeCert6");
-  setupCertificate("openCertSin","certPopupSin","closeCertSin");
-  setupCertificate("openCertZidio","certPopupZidio","closeCertZidio");
-  setupCertificate("openCertInAmigos","certPopupInAmigos","closeCertInAmigos");
-  setupCertificate("openCertSkybrisk","certPopupSkybrisk","closeCertSkybrisk");
-  setupCertificate("openCertImagios","certPopupImagios","closeCertImagios");
+
+      // 2. Close Modal Cross Button Click
+      if (e.target.closest('.close-popup')) {
+          const popup = e.target.closest('.certificate-popup');
+          if (popup) {
+              popup.style.display = 'none';
+          }
+      }
+
+      // 3. Click Outside Modal Box (Background Overlay Click)
+      if (e.target.classList.contains('certificate-popup')) {
+          e.target.style.display = 'none';
+      }
+  });
 
   // ===== Contact Form =====
   const contactForm = document.querySelector('[data-local-contact-form]');
