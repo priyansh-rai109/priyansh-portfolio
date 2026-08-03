@@ -205,24 +205,19 @@ document.addEventListener('DOMContentLoaded', () => {
   const typedScript = document.createElement("script");
   typedScript.src = "https://cdn.jsdelivr.net/npm/typed.js@2.0.12";
   typedScript.onload = () => {
-      const typedElement = document.querySelector(".hero-subtitle");
+      const typedElement = document.querySelector("#typed");
       if (typedElement) {
-          typedElement.style.animation = "none";
-          typedElement.style.borderRight = "none";
-          typedElement.style.width = "auto";
-          typedElement.style.whiteSpace = "normal";
-          typedElement.style.display = "inline-block";
-          typedElement.innerHTML = "";
-
-          new window.Typed(".hero-subtitle", {
+          new window.Typed("#typed", {
               strings: ["Full-Stack Developer", "AI Tools Builder", "2nd Year CSE @ JIET"],
-              typeSpeed: 70,
+              typeSpeed: 60,
               backSpeed: 40,
-              backDelay: 2200,
-              startDelay: 300,
-              loop: true
+              backDelay: 2000,
+              startDelay: 200,
+              loop: true,
+              showCursor: true,
+              cursorChar: '|'
           });
-          console.log("✅ Typed.js Loaded!");
+          console.log("✅ Typed.js Loaded & Cycling!");
       }
   };
   document.body.appendChild(typedScript);
@@ -338,10 +333,13 @@ document.addEventListener('DOMContentLoaded', () => {
       if (statNumbers.length === 0) return;
 
       statNumbers.forEach(stat => {
+          if (stat.dataset.counted === "true") return;
+          stat.dataset.counted = "true";
+
           const target = parseInt(stat.getAttribute('data-target'), 10);
           if (isNaN(target)) return;
 
-          const duration = 1800; // 1.8 seconds count-up
+          const duration = 1600; // 1.6 seconds count-up
           const startTime = performance.now();
 
           function updateCount(currentTime) {
@@ -378,8 +376,11 @@ document.addEventListener('DOMContentLoaded', () => {
                       statsObserver.disconnect();
                   }
               });
-          }, { threshold: 0.4 });
+          }, { threshold: 0.1 });
           statsObserver.observe(heroStatsRow);
+
+          // Immediate/Fallback Trigger for Hero section initial view
+          setTimeout(animateStatsCounter, 400);
       }
   }
 });
