@@ -11,6 +11,7 @@
   --text: #F5F5F5;
   --text-muted: #A0A0A0;
   --glass-blur: blur(16px);
+  --section-padding: 90px 0;
 }
 
 html {
@@ -69,10 +70,11 @@ body::before {
 #particles-js {
   position: absolute;
   width: 100%;
-  height: 100vh;
+  height: 100%;
   top: 0;
   left: 0;
-  z-index: -1; /* Behind content */
+  z-index: 0;
+  pointer-events: auto;
 }
 
 /* ===== CONTAINERS ===== */
@@ -80,6 +82,8 @@ body::before {
   width: 90%;
   max-width: 1200px;
   margin: auto;
+  position: relative;
+  z-index: 5;
 }
 
 /* ===== NAVBAR (Glassmorphism) ===== */
@@ -176,9 +180,10 @@ body::before {
 
 /* ===== SECTIONS ===== */
 .section {
-  padding: 100px 20px;
+  padding: var(--section-padding);
   text-align: center;
-  animation: fadeIn 0.8s ease-out forwards;
+  position: relative;
+  z-index: 5;
 }
 
 @keyframes fadeIn {
@@ -226,23 +231,27 @@ body::before {
 
 /* ===== BUTTONS ===== */
 .btn {
-  display: inline-block;
-  padding: 12px 28px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px 26px;
   border-radius: 30px;
   background: linear-gradient(135deg, var(--primary), #00b4d8);
-  color: #000;
+  color: #000000;
   text-decoration: none;
   font-weight: 600;
-  margin: 10px 10px 0 0;
-  transition: all 0.3s ease;
+  font-size: 0.95rem;
+  line-height: 1.2;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   border: none;
   cursor: pointer;
-  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.2);
+  box-shadow: 0 4px 15px rgba(0, 229, 255, 0.25);
 }
 
 .btn:hover {
   transform: translateY(-3px);
-  box-shadow: 0 8px 25px rgba(0, 229, 255, 0.4);
+  box-shadow: 0 8px 25px rgba(0, 229, 255, 0.45);
 }
 
 .btn.secondary {
@@ -253,8 +262,14 @@ body::before {
 }
 
 .btn.secondary:hover {
-  background: rgba(0, 229, 255, 0.1);
-  box-shadow: 0 0 15px rgba(0, 229, 255, 0.2);
+  background: rgba(0, 229, 255, 0.12);
+  box-shadow: 0 0 15px rgba(0, 229, 255, 0.25);
+}
+
+.btn-view {
+  padding: 10px 20px;
+  font-size: 0.88rem;
+  border-radius: 25px;
 }
 
 /* ===== HERO / ABOUT SECTION ===== */
@@ -800,8 +815,9 @@ body::before {
 .certificates-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 30px;
+  gap: 24px;
   margin-top: 40px;
+  align-items: stretch;
 }
 
 .certificate-card {
@@ -809,33 +825,33 @@ body::before {
   backdrop-filter: var(--glass-blur);
   -webkit-backdrop-filter: var(--glass-blur);
   border: 1px solid var(--surface-border);
-  padding: 32px 28px;
+  padding: 28px 24px;
   border-radius: 20px;
   text-align: left;
-  transition: all 0.4s ease;
+  transition: all 0.35s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  height: 100%;
   position: relative;
   overflow: hidden;
 }
 
 .certificate-card:hover {
-  transform: translateY(-8px);
+  transform: translateY(-6px);
   background: var(--surface-hover);
-  border-color: rgba(0, 229, 255, 0.35);
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4), 0 0 20px rgba(0, 229, 255, 0.12);
+  border-color: rgba(0, 229, 255, 0.4);
+  box-shadow: 0 16px 36px rgba(0, 0, 0, 0.45), 0 0 20px rgba(0, 229, 255, 0.15);
 }
 
 .cert-card-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 14px;
 }
 
 .cert-badge {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -847,7 +863,7 @@ body::before {
 }
 
 .cert-score-badge {
-  font-size: 0.75rem;
+  font-size: 0.72rem;
   font-weight: 700;
   color: #ff9f43;
   background: rgba(255, 159, 67, 0.12);
@@ -857,15 +873,15 @@ body::before {
 }
 
 .cert-title {
-  font-size: 1.25rem;
+  font-size: 1.2rem;
   font-weight: 600;
   color: var(--text);
-  margin-bottom: 10px;
-  line-height: 1.4;
+  margin-bottom: 8px;
+  line-height: 1.35;
 }
 
 .cert-org {
-  font-size: 0.95rem;
+  font-size: 0.9rem;
   color: var(--primary);
   font-weight: 500;
   margin-bottom: 12px;
@@ -875,23 +891,33 @@ body::before {
 }
 
 .cert-desc {
-  font-size: 0.9rem;
+  font-size: 0.88rem;
   color: var(--text-muted);
   line-height: 1.6;
-  margin-bottom: 22px;
+  margin-bottom: 20px;
   flex-grow: 1;
 }
 
-@media (max-width: 992px) {
+.certificate-card .btn-view {
+  margin-top: auto;
+  width: 100%;
+  text-align: center;
+}
+
+@media (max-width: 1024px) {
   .certificates-grid {
     grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
   }
 }
 
-@media (max-width: 768px) {
+@media (max-width: 640px) {
   .certificates-grid {
     grid-template-columns: 1fr;
-    gap: 25px;
+    gap: 20px;
+  }
+  .certificate-card {
+    padding: 22px 18px;
   }
 }
 
