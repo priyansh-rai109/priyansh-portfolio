@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects & Software | Priyansh Rai</title>
+  <meta name="description" content="Explore full-stack applications built by Priyansh Rai — JalSeva Water Marketplace, IntellMeet AI Platform, IRIS 365 Campus OS, LuminaBooks, and ARIA RAG Agent.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ===== Sticky Navbar ===== -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html" class="active">Projects</a>
+    <a href="certificates.html">Certificates</a>
+    <a href="contact.html">Contact</a>
+
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+
+  <!-- ===== Projects Page Section ===== -->
+  <section id="projects" class="section container">
+    <h2 class="section-title">🚀 Featured Projects</h2>
+    <p class="section-sub">Production-grade web applications, SaaS platforms, and AI integrations</p>
+
+    <!-- Featured Flagship Projects Grid -->
+    <div class="projects-featured-grid">
+
+      <!-- Featured Project 1: IRIS 365 -->
+      <div class="hero-project-card">
+        <div class="project-img-container">
+          <img src="images/iris.png" alt="IRIS 365 Smart Campus Platform" class="project-img" loading="lazy">
+          <div class="project-img-overlay"></div>
+        </div>
+        <div class="project-card-content">
+          <span class="project-header-badge">Smart Campus OS</span>
+          <h3 class="project-title">IRIS 365 — Smart Campus Operating System</h3>
+          <p class="project-description">
+            Comprehensive college management platform featuring real-time attendance tracking, student analytics, automated grade reports, and multi-role administrative dashboards. Migrated to Vercel with optimized Supabase RLS security.
+          </p>
+          <div class="tech-pills">
+            <span class="tech-pill">Next.js 14</span>
+            <span class="tech-pill">TypeScript</span>
+            <span class="tech-pill">Supabase PostgreSQL</span>
+            <span class="tech-pill">Tailwind CSS</span>
+            <span class="tech-pill">Vercel Deployment</span>
+          </div>
+          <div class="card-buttons">
+            <a href="https://iris-nu-ten.vercel.app" target="_blank" rel="noopener noreferrer" class="btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="https://github.com/mrkhushal19/iris.git" target="_blank" rel="noopener noreferrer" class="btn secondary"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Project 2: JalSeva -->
+      <div class="hero-project-card">
+        <div class="project-img-container">
+          <img src="images/jalseva.png" alt="JalSeva Water Delivery Marketplace" class="project-img" loading="lazy">
+          <div class="project-img-overlay"></div>
+        </div>
+        <div class="project-card-content">
+          <span class="project-header-badge">Water Press App</span>
+          <h3 class="project-title">JalSeva — Water Delivery Marketplace</h3>
+          <p class="project-description">
+            Jodhpur's first water delivery marketplace — order tankers, 20L cans, and RO pouches from verified suppliers with real-time tracking. Full-stack Next.js 14 app with Supabase, Razorpay payments, and MSG91 OTP authentication.
+          </p>
+          <div class="tech-pills">
+            <span class="tech-pill">Next.js 14</span>
+            <span class="tech-pill">Supabase</span>
+            <span class="tech-pill">Razorpay API</span>
+            <span class="tech-pill">MSG91 OTP</span>
+            <span class="tech-pill">TypeScript</span>
+          </div>
+          <div class="card-buttons">
+            <a href="https://jalseva-web.vercel.app" target="_blank" rel="noopener noreferrer" class="btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="https://github.com/priyansh-rai109/jalseva-web.git" target="_blank" rel="noopener noreferrer" class="btn secondary"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+      <!-- Featured Project 3: IntellMeet -->
+      <div class="hero-project-card">
+        <div class="project-img-container">
+          <img src="images/intellmeet.png" alt="IntellMeet AI Meeting Platform" class="project-img" loading="lazy">
+          <div class="project-img-overlay"></div>
+        </div>
+        <div class="project-card-content">
+          <span class="project-header-badge">AI & WebRTC</span>
+          <h3 class="project-title">IntellMeet — AI-Powered Meeting Platform</h3>
+          <p class="project-description">
+            AI meeting platform that automatically transcribes, summarizes, and extracts action items from video calls in real-time. Built with real-time WebRTC video, Kanban boards, and performance analytics during MERN Stack internship at Zidio Development.
+          </p>
+          <div class="tech-pills">
+            <span class="tech-pill">React</span>
+            <span class="tech-pill">Node.js</span>
+            <span class="tech-pill">Socket.io</span>
+            <span class="tech-pill">WebRTC</span>
+            <span class="tech-pill">OpenAI API</span>
+          </div>
+          <div class="card-buttons">
+            <a href="https://intell-meet-ten.vercel.app" target="_blank" rel="noopener noreferrer" class="btn"><i class="fas fa-external-link-alt"></i> Live Demo</a>
+            <a href="https://github.com/priyansh-rai109/IntellMeet.git" target="_blank" rel="noopener noreferrer" class="btn secondary"><i class="fab fa-github"></i> GitHub</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Compact Other Projects Grid -->
+    <div class="other-projects-wrapper">
+      <div class="other-projects-title"><i class="fas fa-code-branch" style="color: var(--primary); margin-right: 10px;"></i> Other Notable Projects</div>
+      <p class="other-projects-sub">Specialized utilities, AI tools, and open-source repositories</p>
+
+      <div class="other-projects-grid">
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>LuminaBooks</h4>
+            <span class="other-project-tag">Bookstore Management</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>Neural Activation Visualizer</h4>
+            <span class="other-project-tag">Streamlit & PyTorch</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>Anti Gravity</h4>
+            <span class="other-project-tag">Physics Engine</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>ARIA — IT Support RAG Agent</h4>
+            <span class="other-project-tag">LangChain & ChromaDB</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>College Agent</h4>
+            <span class="other-project-tag">RAG Assistant</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>Vibe AI</h4>
+            <span class="other-project-tag">React & AI</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+
+        <div class="other-project-card">
+          <div class="other-project-info">
+            <h4>StockVision</h4>
+            <span class="other-project-tag">Real-time Dashboard</span>
+          </div>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer" class="other-project-link" aria-label="GitHub Repository"><i class="fab fa-github"></i></a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>&copy; <span id="year"></span> <strong>Priyansh Rai</strong>. Built with Passion & Precision. All Rights Reserved.</p>
+  </footer>
+
+  <!-- ===== JavaScript ===== -->
+  <script src="js/script.js"></script>
+</body>
+</html>

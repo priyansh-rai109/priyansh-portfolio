@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Me | Priyansh Rai</title>
+  <meta name="description" content="Get in touch with Priyansh Rai — Full-Stack Developer & AI Tools Builder. Available for developer roles, freelance projects, and tech collaborations.">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="images/logo.jpg">
+  
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+  
+  <!-- Main Stylesheet -->
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <!-- ===== Sticky Navbar ===== -->
+  <nav class="navbar">
+    <a href="index.html">Home</a>
+    <a href="about.html">About</a>
+    <a href="skills.html">Skills</a>
+    <a href="experience.html">Experience</a>
+    <a href="projects.html">Projects</a>
+    <a href="certificates.html">Certificates</a>
+    <a href="contact.html" class="active">Contact</a>
+
+    <button id="theme-toggle" class="theme-btn" aria-label="Toggle Theme">
+      <i class="fas fa-moon"></i>
+    </button>
+  </nav>
+
+  <!-- ===== Contact Page Section ===== -->
+  <section id="contact" class="section container contact-container">
+    <h2 class="section-title">📬 Contact Me</h2>
+    <p class="section-sub">Feel free to reach out via email or message me directly below</p>
+
+    <div class="contact-grid">
+
+      <!-- Contact Info Cards -->
+      <div class="contact-info">
+        <h3 style="margin-bottom: 22px; color: var(--text);">Direct Channels</h3>
+
+        <p><i class="fas fa-envelope icon"></i>
+          <a href="mailto:jpriyansh.rai@gmail.com">jpriyansh.rai@gmail.com</a>
+        </p>
+
+        <p><i class="fas fa-envelope-open-text icon"></i>
+          <a href="mailto:Priyansh0906@icloud.com">Priyansh0906@icloud.com</a>
+        </p>
+
+        <p><i class="fas fa-phone icon"></i>
+          <a href="tel:7851923500">+91 7851923500</a>
+        </p>
+
+        <p><i class="fab fa-github icon"></i>
+          <a href="https://github.com/priyansh-rai109" target="_blank" rel="noopener noreferrer">github.com/priyansh-rai109</a>
+        </p>
+
+        <p><i class="fab fa-linkedin icon"></i>
+          <a href="https://linkedin.com/in/priyansh-rai-0396a6333" target="_blank" rel="noopener noreferrer">linkedin.com/in/priyansh-rai-0396a6333</a>
+        </p>
+      </div>
+
+      <!-- Contact Form -->
+      <div class="contact-form-section">
+        <h3 style="margin-bottom: 22px; color: var(--text);">Send a Message</h3>
+
+        <form action="https://formspree.io/f/mvgvalea" method="POST" class="contact-form">
+
+          <label for="name">Your Name</label>
+          <input type="text" id="name" name="name" placeholder="John Doe" required>
+
+          <label for="email">Your Email</label>
+          <input type="email" id="email" name="email" placeholder="john@example.com" required>
+
+          <label for="message">Your Message</label>
+          <textarea id="message" name="message" placeholder="How can I help you?" rows="5" required></textarea>
+
+          <button type="submit" class="btn" style="width: 100%; margin-top: 5px;">Send Message &rarr;</button>
+        </form>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ===== Footer ===== -->
+  <footer>
+    <p>&copy; <span id="year"></span> <strong>Priyansh Rai</strong>. Built with Passion & Precision. All Rights Reserved.</p>
+  </footer>
+
+  <!-- ===== JavaScript ===== -->
+  <script src="js/script.js"></script>
+</body>
+</html>

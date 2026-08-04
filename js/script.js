@@ -44,28 +44,28 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== Footer Year Auto Update =====
   if(yearSpan) yearSpan.textContent = new Date().getFullYear();
 
-  // ===== Navbar ScrollSpy Active Link =====
-  const sections = document.querySelectorAll("section[id]");
-  
-  function updateActiveNav() {
-      const scrollY = window.pageYOffset;
-      sections.forEach(current => {
-          const sectionHeight = current.offsetHeight;
-          const sectionTop = current.offsetTop - 130;
-          const sectionId = current.getAttribute("id");
-          const navLink = document.querySelector(`.navbar a[href*="#${sectionId}"]`);
-          
-          if (navLink) {
-              if (scrollY > sectionTop && scrollY <= sectionTop + sectionHeight) {
-                  navLink.classList.add("active");
+  // ===== Multi-Page Navbar Active Link Highlight =====
+  const currentPage = window.location.pathname.split("/").pop() || "index.html";
+  navLinks.forEach(link => {
+      const href = link.getAttribute("href");
+      if (href && (href === currentPage || (currentPage === "" && href === "index.html"))) {
+          link.classList.add("active");
+      } else if (href && href.startsWith("#")) {
+          // Single-page fallback scrollspy
+          const sectionId = href.substring(1);
+          const section = document.getElementById(sectionId);
+          if (section) {
+              const rect = section.getBoundingClientRect();
+              if (rect.top <= 150 && rect.bottom >= 150) {
+                  link.classList.add("active");
               } else {
-                  navLink.classList.remove("active");
+                  link.classList.remove("active");
               }
           }
-      });
-  }
-  window.addEventListener("scroll", updateActiveNav);
-  updateActiveNav();
+      } else {
+          link.classList.remove("active");
+      }
+  });
 
   // ===== Scroll-to-top Button =====
   scrollBtn.addEventListener("click", () => {
@@ -79,23 +79,32 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== Skill Bar Animation =====
   const bars = document.querySelectorAll('.bar');
   function animateSkills() {
-      const triggerPoint = window.innerHeight * 0.8;
+      const triggerPoint = window.innerHeight * 0.85;
       bars.forEach(bar => {
           const barTop = bar.getBoundingClientRect().top;
           if(barTop < triggerPoint){
               const width = bar.getAttribute('data-width');
-              bar.style.width = width;
+              if (width) bar.style.width = width;
           }
       });
   }
   window.addEventListener('scroll', animateSkills);
-  animateSkills(); // trigger on page load
+  animateSkills(); // trigger on load
 
-  // ===== Certificate Popups (Robust Event Delegation) =====
+  // ===== Certificate Popups Lightbox =====
+  function closeAllPopups() {
+      document.querySelectorAll('.certificate-popup').forEach(popup => {
+          popup.style.display = 'none';
+          popup.classList.remove('active', 'show');
+      });
+      document.body.style.overflow = '';
+  }
+
   document.addEventListener('click', (e) => {
       // 1. Open Modal Button Click
       const btn = e.target.closest('.btn-view, [data-cert-target], [id^="openCert"]');
       if (btn) {
+          e.preventDefault();
           let targetId = btn.getAttribute('data-cert-target');
           if (!targetId && btn.id) {
               targetId = btn.id.replace('openCert', 'certPopup');
@@ -103,22 +112,28 @@ document.addEventListener('DOMContentLoaded', () => {
           if (targetId) {
               const popup = document.getElementById(targetId);
               if (popup) {
+                  closeAllPopups();
                   popup.style.display = 'flex';
+                  popup.classList.add('active', 'show');
+                  document.body.style.overflow = 'hidden';
               }
           }
       }
 
       // 2. Close Modal Cross Button Click
       if (e.target.closest('.close-popup')) {
-          const popup = e.target.closest('.certificate-popup');
-          if (popup) {
-              popup.style.display = 'none';
-          }
+          closeAllPopups();
       }
 
       // 3. Click Outside Modal Box (Background Overlay Click)
       if (e.target.classList.contains('certificate-popup')) {
-          e.target.style.display = 'none';
+          closeAllPopups();
+      }
+  });
+
+  document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+          closeAllPopups();
       }
   });
 
